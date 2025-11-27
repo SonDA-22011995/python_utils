@@ -1,3 +1,6 @@
+- [Format datetime to string](#format-datetime-to-string)
+
+
 ## Format datetime to string
 
 ```
