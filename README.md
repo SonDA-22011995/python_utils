@@ -1,6 +1,7 @@
 - [Format datetime to string](#format-datetime-to-string)
 - [index of the day of the week from a date in Python](#index-of-the-day-of-the-week-from-a-date-in-python)
 - [Add days to a date in Python](#add-days-to-a-date-in-python)
+- [A global variable](#a-global-variable)
 
 ## Format datetime to string
 
@@ -75,4 +76,33 @@ print(f"Another original date: {another_date}")
 more_days = 30
 future_date = another_date + timedelta(days=more_days)
 print(f"Date after adding {more_days} days: {future_date}")
+```
+
+## A global variable
+
+**Key characteristics of global variables:**
+
+- **Scope**: They have global scope within the module where they are defined.
+- **Accessibility**: You can read the value of a global variable directly inside a function without any special declaration.
+- **Modification**: To modify a global variable inside a function, you must explicitly declare it using the **global** keyword. If you assign a new value to a variable with the same name inside a function without using **global**, Python will create a new local variable with that name, rather than modifying the **global** one
+
+**Example of using and modifying a global variable:**
+
+```
+# Define a global variable
+global_var = "Hello"
+
+def access_global():
+    print(f"Inside function (accessing): {global_var}")
+
+def modify_global():
+    global global_var  # Declare intent to modify the global variable
+    global_var = "World"
+    print(f"Inside function (modifying): {global_var}")
+
+access_global()
+print(f"Outside function (after access): {global_var}")
+
+modify_global()
+print(f"Outside function (after modification): {global_var}")
 ```
