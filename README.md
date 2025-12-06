@@ -1,4 +1,5 @@
 - [The `__str__` method](#the-__str__-method)
+- [The `__repr__` method](#the-__repr__-method)
 - [Lambda functions](#lambda-functions)
 - [Destructuring](#destructuring)
 - [Format datetime to string](#format-datetime-to-string)
@@ -23,6 +24,27 @@ p1 = Person("Tobias", 36)
 
 print(p1)
 # It print Tobias (36)
+```
+
+## The `__repr__` method
+
+- Used in debugging and logging
+- Fallback for **str**: If a class does not define a **str** method, Python will fall back to using **repr** for user-facing string conversions (e.g., when using print())
+
+```
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f"Point(x={self.x}, y={self.y})"
+
+# Usage
+p = Point(10, 20)
+print(repr(p))  # Explicitly calls __repr__
+print(p)        # Calls __repr__ by default if __str__ is not defined
+
 ```
 
 ## Lambda functions
