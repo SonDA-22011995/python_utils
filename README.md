@@ -44,7 +44,10 @@ print(f"After modification, Car 2 now has {car2.number_of_wheels} wheels.")
 ## The `@classmethod` method
 
 - The `@classmethod` decorator in Python defines a method that belongs to the class itself, rather than to an instance of the class.
-- Accessing Class Attributes: Class methods can access and modify class-level attributes, which are shared across all instances of the class. This allows them to manage and interact with the state of the class itself.
+- **Accessing Class Attributes**: Class methods can access and modify class-level attributes, which are shared across all instances of the class. This allows them to manage and interact with the state of the class itself.
+- **Calling Conventions**: Class methods can be called on the class directly (e.g., `MyClass.my_class_method()`) or on an instance of the class (e.g., `my_instance.my_class_method()`). When called on an instance, the instance's class is automatically passed as the cls argument.
+- **Alternative Constructors (Factory Methods)**: A common and powerful use of class methods is to create alternative constructors. These methods provide different ways to instantiate objects of the class, often by processing different input formats or applying specific logic before creating an instance. For example, a Person class might have a `@classmethod` called `from_birth_year` to create a Person object from a birth year.
+- **Modifying Class State**: Class methods are suitable for operations that need to modify or interact with the class's state, such as updating class variables or performing actions that affect all instances.
 
 ```
 class Car:
