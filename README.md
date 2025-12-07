@@ -1,3 +1,5 @@
+- [The `class attributes`](#the-class-attributes)
+- [The `@classmethod` method](#the-classmethod-method)
 - [The `__str__` method](#the-__str__-method)
 - [The `__repr__` method](#the-__repr__-method)
 - [Lambda functions](#lambda-functions)
@@ -6,6 +8,72 @@
 - [index of the day of the week from a date in Python](#index-of-the-day-of-the-week-from-a-date-in-python)
 - [Add days to a date in Python](#add-days-to-a-date-in-python)
 - [A global variable](#a-global-variable)
+
+## The `class attributes`
+
+- `class attributes` are variables that belong to the class itself, rather than to any specific instance (object) of that class. They are shared among all instances of the class.
+- **Shared across instances**: All objects created from the same class will share the same class attribute and its value.
+- **Defined within the class, outside methods:** Class attributes are typically defined directly within the class body, but outside of any methods like **init**().
+- **Accessed via class or instance**:\*\* You can access a class attribute using either the class name (e.g., ClassName.attribute_name) or an instance of the class (e.g., object_name.attribute_name).
+- **Useful for shared data**: They are suitable for storing data that is common to all instances, such as constants, default values, or counters that track class-level information.
+
+```
+class Car:
+    # This is a class attribute
+    number_of_wheels = 4
+
+    def __init__(self, make, model):
+        self.make = make  # This is an instance attribute
+        self.model = model # This is an instance attribute
+
+# Create instances of the Car class
+car1 = Car("Toyota", "Camry")
+car2 = Car("Honda", "Civic")
+
+# Accessing the class attribute
+print(f"Car 1 has {car1.number_of_wheels} wheels.")
+print(f"Car 2 has {car2.number_of_wheels} wheels.")
+print(f"The Car class has {Car.number_of_wheels} wheels defined.")
+
+# Modifying the class attribute through the class
+Car.number_of_wheels = 6
+print(f"After modification, Car 1 now has {car1.number_of_wheels} wheels.")
+print(f"After modification, Car 2 now has {car2.number_of_wheels} wheels.")
+```
+
+## The `@classmethod` method
+
+- The `@classmethod` decorator in Python defines a method that belongs to the class itself, rather than to an instance of the class.
+- Accessing Class Attributes: Class methods can access and modify class-level attributes, which are shared across all instances of the class. This allows them to manage and interact with the state of the class itself.
+
+```
+class Car:
+    total_cars = 0  # Class variable
+
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+        Car.total_cars += 1  # Increment class variable on instance creation
+
+    @classmethod
+    def get_total_cars(cls):
+        """Returns the total number of Car instances created."""
+        return cls.total_cars
+
+    @classmethod
+    def create_from_string(cls, car_string):
+        """Creates a Car instance from a string like 'Toyota-Camry'."""
+        make, model = car_string.split('-')
+        return cls(make, model)
+
+# Using class methods
+car1 = Car("Honda", "Civic")
+car2 = Car.create_from_string("Ford-Focus")
+
+print(f"Total cars: {Car.get_total_cars()}")
+print(f"Car 1: {car1.make} {car1.model}")
+print(f"Car 2: {car2.make} {car2.model}")
+```
 
 ## The `__str__` method
 
