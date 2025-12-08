@@ -79,32 +79,34 @@ print(f"Multiplication: {result_multiply}")
 - **Modifying Class State**: Class methods are suitable for operations that need to modify or interact with the class's state, such as updating class variables or performing actions that affect all instances.
 
 ```
-class Car:
-    total_cars = 0  # Class variable
+class Vehicle:
+    TYPES = ("car", "bike", "truck")
 
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-        Car.total_cars += 1  # Increment class variable on instance creation
-
-    @classmethod
-    def get_total_cars(cls):
-        """Returns the total number of Car instances created."""
-        return cls.total_cars
+    def __init__(self, v_type, name):
+        self.v_type = v_type
+        self.name = name
 
     @classmethod
-    def create_from_string(cls, car_string):
-        """Creates a Car instance from a string like 'Toyota-Camry'."""
-        make, model = car_string.split('-')
-        return cls(make, model)
+    def car(cls, name):
+        return cls("car", name)
 
-# Using class methods
-car1 = Car("Honda", "Civic")
-car2 = Car.create_from_string("Ford-Focus")
+    @classmethod
+    def bike(cls, name):
+        return cls("bike", name)
 
-print(f"Total cars: {Car.get_total_cars()}")
-print(f"Car 1: {car1.make} {car1.model}")
-print(f"Car 2: {car2.make} {car2.model}")
+    @classmethod
+    def truck(cls, name):
+        return cls("truck", name)
+
+# ----------------------------
+v1 = Vehicle.car("Toyota")
+v2 = Vehicle.bike("Honda")
+v3 = Vehicle.truck("Volvo")
+
+print(v1.v_type, v1.name)  # car Toyota
+print(v2.v_type, v2.name)  # bike Honda
+print(v3.v_type, v3.name)  # truck Volvo
+
 ```
 
 ## The `__str__` method
