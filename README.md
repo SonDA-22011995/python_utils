@@ -1,4 +1,5 @@
 - [The `class attributes`](#the-class-attributes)
+- [The `@staticmethod` method](#the-staticmethod-method)
 - [The `@classmethod` method](#the-classmethod-method)
 - [The `__str__` method](#the-__str__-method)
 - [The `__repr__` method](#the-__repr__-method)
@@ -14,7 +15,7 @@
 - `class attributes` are variables that belong to the class itself, rather than to any specific instance (object) of that class. They are shared among all instances of the class.
 - **Shared across instances**: All objects created from the same class will share the same class attribute and its value.
 - **Defined within the class, outside methods:** Class attributes are typically defined directly within the class body, but outside of any methods like **init**().
-- **Accessed via class or instance**:\*\* You can access a class attribute using either the class name (e.g., ClassName.attribute_name) or an instance of the class (e.g., object_name.attribute_name).
+- **Accessed via class or instance**: You can access a class attribute using either the class name (e.g., ClassName.attribute_name) or an instance of the class (e.g., object_name.attribute_name).
 - **Useful for shared data**: They are suitable for storing data that is common to all instances, such as constants, default values, or counters that track class-level information.
 
 ```
@@ -39,6 +40,34 @@ print(f"The Car class has {Car.number_of_wheels} wheels defined.")
 Car.number_of_wheels = 6
 print(f"After modification, Car 1 now has {car1.number_of_wheels} wheels.")
 print(f"After modification, Car 2 now has {car2.number_of_wheels} wheels.")
+```
+
+## The `@staticmethod` method
+
+- The `@staticmethod` decorator in Python transforms a regular function within a class into a static method. Static methods are distinct from instance methods and class methods in their relationship to the class and its instances.
+- No `self` or `cls` argument
+- Independent of instance and class state: Because static methods don't have access to `self` or `cls`, they cannot directly access or modify instance attributes or class attributes.
+- Called on the class or instance: `ClassName.static_method()`
+- Utility functions: They are often used for utility functions that logically belong to a class but do not require any instance-specific data or class-level state. Examples include helper functions, validation routines, or formatting methods.
+- Code organization: Using @staticmethod helps in organizing code by grouping related functions within a class, even if those functions don't interact with the class's internal state.
+
+```
+class Calculator:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @staticmethod
+    def multiply(x, y):
+        return x * y
+
+# Calling static methods
+result_add = Calculator.add(5, 3)
+print(f"Addition: {result_add}")
+
+calc_instance = Calculator()
+result_multiply = calc_instance.multiply(4, 2)
+print(f"Multiplication: {result_multiply}")
 ```
 
 ## The `@classmethod` method
