@@ -1,6 +1,7 @@
 - [The `class attributes`](#the-class-attributes)
 - [The `@staticmethod` method](#the-staticmethod-method)
 - [The `@classmethod` method](#the-classmethod-method)
+- [`Is-A` relation](#is-a-relation)
 - [The class composition method](#the-class-composition-method)
 - [The `__str__` method](#the-__str__-method)
 - [The `__repr__` method](#the-__repr__-method)
@@ -112,6 +113,39 @@ print(v1.v_type, v1.name)  # car Toyota
 print(v2.v_type, v2.name)  # bike Honda
 print(v3.v_type, v3.name)  # truck Volvo
 
+```
+
+## `Is-A` relation
+
+- It signifies a hierarchical relationship where a subclass (or derived class) is a specialized version of its superclass (or base class).
+- Key characteristics of the `Is-A` relation
+  - **Inheritance**: The "Is-A" relationship is established when one class inherits from another. The subclass automatically gains access to the attributes and methods defined in its superclass.
+  - **Specialization**: The subclass represents a more specific type of the superclass. For example, a Dog `Is-A` Animal, and a Car `Is-A` Vehicle.
+  - **Code Reusability**: Inheritance promotes code reusability by allowing subclasses to inherit and potentially override or extend the functionality of their superclasses, rather than duplicating code.
+  - **Polymorphism**: The "Is-A" relationship enables polymorphism, where objects of different classes can be treated as objects of a common superclass, allowing for more flexible and extensible code.
+
+```
+# Superclass (Base class)
+class Animal:
+    def speak(self):
+        return "Animal speaks"
+
+# Subclass (Derived class) - Dog IS-A Animal
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+# Subclass (Derived class) - Cat IS-A Animal
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+# Usage
+my_dog = Dog()
+my_cat = Cat()
+
+print(my_dog.speak())  # Output: Woof!
+print(my_cat.speak())  # Output: Meow!
 ```
 
 ## The class composition method
