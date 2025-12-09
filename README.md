@@ -17,6 +17,8 @@
 - [Type hint](#type-hint)
 - [`__name__` variable](#__name__-variable)
 - [Imports](#imports)
+- [Relative Imports](#relative-imports)
+- [`__init__` file](#__init__-file)
 
 ## The `class attributes`
 
@@ -666,3 +668,7 @@ my_module's __name__ when imported is: my_module
 ## Imports
 
 - The `import` statement is used to bring modules or specific components (functions, classes, variables) from modules into the current namespace, making them available for use. This promotes code reusability and organization
+
+## Relative Imports
+
+## `__init__` file
