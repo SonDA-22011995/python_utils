@@ -519,3 +519,52 @@ def f(data: List[int]) -> Optional[Tuple[int, str]]:
 def f(data: list[int]) -> tuple[int, str] | None:
     return None
 ```
+
+- When Forward References Are Needed in Python
+  - When a method returns the same class (self-type)
+  - When two classes reference each other (mutual references)
+  - Recursive data structures
+  - When annotating classmethods that return the class
+  - When using complex types involving the class
+  - When referencing a type defined later in the file
+
+```
+class User:
+    def clone(self) -> "User":
+        return User()
+```
+
+```
+class A:
+    def set_b(self, b: "B"): ...
+
+class B:
+    def set_a(self, a: "A"): ...
+```
+
+```
+class Node:
+    def __init__(self, value: int, left: "Node" = None, right: "Node" = None):
+        self.value = value
+```
+
+```
+class Product:
+    @classmethod
+    def from_name(cls, name: str) -> "Product":
+        return cls(name)
+```
+
+```
+from typing import List
+
+class Shape:
+    def combine(self, others: List["Shape"]) -> "Shape":
+        return self
+```
+
+```
+# When referencing a type defined later in the file
+
+def make(obj: "Factory"): ...
+```
