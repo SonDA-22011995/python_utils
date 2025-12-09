@@ -15,6 +15,7 @@
 - [Mixing Positional and Arbitrary Arguments](#mixing-positional-and-arbitrary-arguments)
 - [Arbitrary Keyword Arguments](#arbitrary-keyword-arguments)
 - [Type hint](#type-hint)
+- [Imports](#imports)
 
 ## The `class attributes`
 
@@ -576,3 +577,44 @@ def make(obj: "Factory"): ...
 | **3.11+**      | `-> Self`                           | ⭐ **Best option**      |
 | **3.9–3.10**   | Generics + `Type[T]`                | 👍 **Most common**      |
 | **3.7–3.8**    | `"User"` (string forward reference) | ✔ **Legacy-compatible** |
+
+- Use Self - python 3.11+
+
+```
+from typing import Self
+
+class User:
+    def __init__(self, name: str):
+        self.name = name
+
+    @classmethod
+    def from_fullname(cls, fullname: str) -> Self:
+        first, last = fullname.split()
+        return cls(first + " " + last)
+
+
+u = User.from_fullname("John Doe")
+
+```
+
+- Use Generics + `Type[T]` - python 3.9 -> 3.10
+
+```
+from typing import Type, TypeVar
+
+T = TypeVar("T", bound="User")
+
+class User:
+    def __init__(self, name: str):
+        self.name = name
+
+    @classmethod
+    def from_fullname(cls: Type[T], fullname: str) -> T:
+        first, last = fullname.split()
+        return cls(first + " " + last)
+
+```
+
+## Imports
+
+- The `import` statement is used to bring modules or specific components (functions, classes, variables) from modules into the current namespace, making them available for use. This promotes code reusability and organization
