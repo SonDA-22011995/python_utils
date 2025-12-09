@@ -13,6 +13,7 @@
 - [Arbitrary Positional Arguments](#arbitrary-positional-arguments)
 - [Mixing Positional and Arbitrary Arguments](#mixing-positional-and-arbitrary-arguments)
 - [Arbitrary Keyword Arguments](#arbitrary-keyword-arguments)
+- [Type hint](#type-hint)
 
 ## The `class attributes`
 
@@ -114,6 +115,43 @@ print(v3.v_type, v3.name)  # truck Volvo
 ```
 
 ## The class composition method
+
+- An object-oriented programming concept where a class includes an object of another class as an attribute
+- This creates a **has-a** relationship, meaning the composite class has or owns a component object.
+- Key Concepts
+  - `Has-A` Relationship: This principle is central to composition. For example, a Car class "has an" Engine objec
+  - **Strong Dependency**: In a strict composition relationship, the component object cannot exist independently of the composite object. If the Car object is destroyed, the Engine object it owns is also conceptually (or programmatically) destroyed.
+  - **Code Reuse and Modularity**: Composition promotes flexibility and code reuse without creating a rigid class hierarchy that comes with inheritance. It allows you to change the behavior of a class by simply replacing one of its component objects.
+  - **Single Responsibility Principle**: Composition helps in creating smaller, more focused classes, adhering to the principle that a class should have one specific responsibility
+
+```
+class Engine:
+    def __init__(self, horse_power):
+        self.horse_power = horse_power
+
+    def start(self):
+        return "Engine started."
+
+class Car:
+    def __init__(self, make, model, horse_power):
+        self.make = make
+        self.model = model
+        # Composition: A Car has an Engine object as an attribute
+        self.engine = Engine(horse_power)
+
+    def display_car_info(self):
+        engine_status = self.engine.start() # Accessing a method of the composed object
+        return f"{self.make} {self.model} with {self.engine.horse_power}hp. {engine_status}"
+
+# Create a Car instance
+my_car = Car(make="Ford", model="Mustang", horse_power=500)
+print(my_car.display_car_info())
+```
+
+- In this example
+  - The Car class is the composite class.
+  - The Engine class is the component class.
+  - The Car class creates and manages an Engine instance within its own `__init__` method, demonstrating the strong ownership inherent in composition.
 
 ## The `__str__` method
 
@@ -397,3 +435,5 @@ user_profile = build_profile(
 )
 print(user_profile)
 ```
+
+## Type hint
