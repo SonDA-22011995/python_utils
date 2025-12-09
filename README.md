@@ -15,6 +15,7 @@
 - [Mixing Positional and Arbitrary Arguments](#mixing-positional-and-arbitrary-arguments)
 - [Arbitrary Keyword Arguments](#arbitrary-keyword-arguments)
 - [Type hint](#type-hint)
+- [`__name__` variable](#__name__-variable)
 - [Imports](#imports)
 
 ## The `class attributes`
@@ -613,6 +614,46 @@ class User:
         first, last = fullname.split()
         return cls(first + " " + last)
 
+```
+
+## `__name__` variable
+
+- Built-in variable that automatically gets assigned a value by the Python interpreter based on how the script is being executed
+- How `__name__` works
+  - **When a script is run directly**: If a Python file is executed as the main program (e.g., by running python your_script.py from the command line), the `__name__` variable within that file is set to the string `'__main__'`
+  - **When a script is imported as a module**: If a Python file is imported into another Python file as a module (e.g., import your_module), the `__name__` variable within the imported file is set to the name of the module (the filename without the .py extension).`
+- Common Use Case: `if __name__ == '__main__'`:
+  - Provide a clear entry point: Define the main logic of your script within this block.
+  - Prevent unintended execution: Ensure that certain code (like test cases or setup functions) only runs when the file is the primary executable, avoiding side effects when imported
+  - Create reusable modules: Write modules that can be both executed independently and imported by other scripts without automatically running their main logic
+
+```
+# my_module.py
+
+def greet(name):
+    return f"Hello, {name}!"
+
+if __name__ == '__main__':
+    # This code will only run when my_module.py is executed directly
+    print(greet("World"))
+    print(f"This script's __name__ is: {__name__}")
+```
+
+If you run python my_module.py, the output will be:
+
+```
+Hello, World!
+This script's __name__ is: __main__
+```
+
+If you import my_module into another script:
+
+```
+# another_script.py
+import my_module
+
+print(my_module.greet("Python"))
+print(f"my_module's __name__ when imported is: {my_module.__name__}")
 ```
 
 ## Imports
