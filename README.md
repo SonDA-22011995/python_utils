@@ -568,3 +568,11 @@ class Shape:
 
 def make(obj: "Factory"): ...
 ```
+
+- Conclusion — Which Approach Should You Use?
+
+| Python Version | Syntax Style                        | Recommendation          |
+| -------------- | ----------------------------------- | ----------------------- |
+| **3.11+**      | `-> Self`                           | ⭐ **Best option**      |
+| **3.9–3.10**   | Generics + `Type[T]`                | 👍 **Most common**      |
+| **3.7–3.8**    | `"User"` (string forward reference) | ✔ **Legacy-compatible** |
