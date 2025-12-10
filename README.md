@@ -672,6 +672,68 @@ my_module's __name__ when imported is: my_module
 
 ## Absolute Imports
 
+- An absolute path is the full, complete address of a file or directory, starting from the root of the file system
+
+```
+my_project/
+│
+├── app/
+│   ├── __init__.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   └── calculator.py
+│   └── utils/
+│       ├── __init__.py
+│       └── formatter.py
+│
+└── main.py
+```
+
+```
+# my_project/app/services/calculator.py
+
+def add(a, b):
+    return a + b
+```
+
+```
+# main.py
+from app.services.calculator import add
+
+result = add(5, 3)
+print(result)
+```
+
 ## Relative Imports
+
+- A relative path is a location defined in relation to the current working directory
+
+```
+project/
+    app/
+        __init__.py
+        utils/
+            __init__.py
+            formatter.py
+        services/
+            __init__.py
+            printer.py
+```
+
+```
+# utils/formatter.py
+def to_upper(s):
+    return s.upper()
+
+```
+
+```
+# services/printer.py
+from ..utils.formatter import to_upper
+
+def print_upper(text):
+    print(to_upper(text))
+
+```
 
 ## `__init__` file
