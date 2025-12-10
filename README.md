@@ -973,6 +973,37 @@ BaseException
 
 ## Custom error classes
 
+- Why Define Custom Exceptions?
+
+  - **Clarity**: They provide clear, specific error messages that are relevant to your application.
+  - **Granularity**: They allow for more fine-grained error handling, making it easier to pinpoint and address specific issues.
+  - **Reusability**: They can be reused across different parts of your application or even in different projects.
+
+- Defining a Custom Exception
+
+```
+class MyCustomError(Exception):
+    # Exception raised for custom error scenarios.
+    # Attributes:
+    # message -- explanation of the error
+
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+```
+
+```
+class MyCustomError(Exception):
+    # Exception raised for custom error in the application.
+
+    def __init__(self, message, error_code):
+        super().__init__(message)
+        self.error_code = error_code
+
+    def __str__(self):
+        return f"{self.message} (Error Code: {self.error_code})"
+```
+
 ## Raise an exception
 
 - `raise` is the correct Python keyword for signaling an error or an unusual condition in your program, effectively halting its normal flow
@@ -984,6 +1015,24 @@ x = -5
 ```
 
 ## Using raise with a custom exception.
+
+- Raising a Custom Exception
+
+```
+def divide(a, b):
+    if b == 0:
+        raise MyCustomError("Division by zero is not allowed", 400)
+    return a / b
+```
+
+- Handling Custom Exceptions
+
+```
+try:
+    result = divide(10, 0)
+except MyCustomError as e:
+    print(f"Caught an error: {e}")
+```
 
 ## Re-raising an exception
 
