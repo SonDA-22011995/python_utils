@@ -20,6 +20,7 @@
 - [Absolute Imports](#absolute-imports)
 - [Relative Imports](#relative-imports)
 - [`__init__` file](#__init__-file)
+- [Errors](#errors)
 
 ## The `class attributes`
 
@@ -837,3 +838,34 @@ mypackage.module2.func2()
 # This is func1 from module1
 # This is func2 from module2
 ```
+
+## Errors
+
+- Handling Errors
+
+```
+try:
+    # Code that might raise an exception
+    result = 10 / 0
+except ZeroDivisionError:
+    # Code to handle the specific exception
+    print("Cannot divide by zero!")
+except Exception as e:
+    # Catch-all for other exceptions
+    print(f"An unexpected error occurred: {e}")
+finally:
+    # Optional: Code that always executes, regardless of exception
+    print("Execution finished.")
+```
+
+- Exception Object (e) Attributes & Methods
+
+| Attribute / Method | Type                | Description                                                                                      |
+| ------------------ | ------------------- | ------------------------------------------------------------------------------------------------ |
+| `e.args`           | tuple               | The arguments used to create the exception (usually contains the error message).                 |
+| `e.__str__()`      | method              | Returns the human-readable string representation of the exception (similar to calling `str(e)`). |
+| `e.__repr__()`     | method              | Returns the official string representation, useful for debugging.                                |
+| `e.__cause__`      | exception or `None` | The direct cause of the exception when using `raise ... from ...`.                               |
+| `e.__context__`    | exception or `None` | The previous exception that was active when the current exception was raised.                    |
+| `e.__traceback__`  | traceback object    | Contains the full traceback information used for debugging.                                      |
+| `type(e)`          | type                | Returns the exception class (e.g., `<class 'ZeroDivisionError'>`).                               |
