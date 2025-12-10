@@ -21,6 +21,10 @@
 - [Relative Imports](#relative-imports)
 - [`__init__` file](#__init__-file)
 - [Errors](#errors)
+- [Custom error classes](#custom-error-classes)
+- [Raise an exception](#raise-an-exception)
+- [Using raise with a custom exception.](#using-raise-with-a-custom-exception)
+- [Re-raising an exception](#re-raising-an-exception)
 
 ## The `class attributes`
 
@@ -842,6 +846,9 @@ mypackage.module2.func2()
 ## Errors
 
 - Handling Errors
+  - `try` block runs code, raising an exception if any occurs
+  - `except` block catches exceptions
+  - `finally` block always executes
 
 ```
 try:
@@ -869,3 +876,115 @@ finally:
 | `e.__context__`    | exception or `None` | The previous exception that was active when the current exception was raised.                    |
 | `e.__traceback__`  | traceback object    | Contains the full traceback information used for debugging.                                      |
 | `type(e)`          | type                | Returns the exception class (e.g., `<class 'ZeroDivisionError'>`).                               |
+
+- Built-in exception hierarchy of Python
+
+```
+BaseException
+├── Exception
+│   ├── ArithmeticError
+│   │   ├── FloatingPointError
+│   │   ├── OverflowError
+│   │   └── ZeroDivisionError
+│   │
+│   ├── AssertionError
+│   ├── AttributeError
+│   ├── BufferError
+│   ├── EOFError
+│   ├── ExceptionGroup
+│   ├── ImportError
+│   │   └── ModuleNotFoundError
+│   │
+│   ├── LookupError
+│   │   ├── IndexError
+│   │   └── KeyError
+│   │
+│   ├── MemoryError
+│   ├── NameError
+│   │   └── UnboundLocalError
+│   │
+│   ├── OSError
+│   │   ├── BlockingIOError
+│   │   ├── ChildProcessError
+│   │   ├── ConnectionError
+│   │   │   ├── BrokenPipeError
+│   │   │   ├── ConnectionAbortedError
+│   │   │   ├── ConnectionRefusedError
+│   │   │   └── ConnectionResetError
+│   │   │
+│   │   ├── FileExistsError
+│   │   ├── FileNotFoundError
+│   │   ├── InterruptedError
+│   │   ├── IsADirectoryError
+│   │   ├── NotADirectoryError
+│   │   ├── PermissionError
+│   │   ├── ProcessLookupError
+│   │   ├── TimeoutError
+│   │   └── UnsupportedOperation
+│   │
+│   ├── ReferenceError
+│   ├── RuntimeError
+│   │   ├── NotImplementedError
+│   │   └── RecursionError
+│   │
+│   ├── StopAsyncIteration
+│   ├── StopIteration
+│   ├── SyntaxError
+│   │   └── IndentationError
+│   │       └── TabError
+│   │
+│   ├── SystemError
+│   ├── TypeError
+│   ├── ValueError
+│   │   ├── UnicodeError
+│   │   │   ├── UnicodeDecodeError
+│   │   │   ├── UnicodeEncodeError
+│   │   │   └── UnicodeTranslateError
+│   │   │
+│   │   └── UnsupportedOperation (also appears under OSError subclass)
+│   │
+│   ├── Warning
+│   │   ├── UserWarning
+│   │   ├── DeprecationWarning
+│   │   ├── PendingDeprecationWarning
+│   │   ├── SyntaxWarning
+│   │   ├── RuntimeWarning
+│   │   ├── FutureWarning
+│   │   ├── ImportWarning
+│   │   ├── UnicodeWarning
+│   │   └── ResourceWarning
+│   │
+│   └── KeyboardInterrupt
+│
+├── GeneratorExit
+├── KeyboardInterrupt
+└── SystemExit
+```
+
+## Custom error classes
+
+## Raise an exception
+
+- `raise` is the correct Python keyword for signaling an error or an unusual condition in your program, effectively halting its normal flow
+
+```
+x = -5
+    if x < 0:
+        raise ValueError("Sorry, no numbers below zero are allowed.")
+```
+
+## Using raise with a custom exception.
+
+## Re-raising an exception
+
+- Within an except block, you can use a bare raise statement without any arguments to re-raise the exception that was just caught. This is useful for adding context or performing some logging before propagating the exception further up the call stack
+
+```
+try:
+    # Some operation that might raise an exception
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print(f"An error occurred: {e}")
+    # Re-raises the ZeroDivisionError
+    raise
+```
