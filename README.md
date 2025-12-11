@@ -28,6 +28,9 @@
   - [Using raise with a custom exception.](#using-raise-with-a-custom-exception)
   - [Re-raising an exception](#re-raising-an-exception)
   - [First-class functions](#first-class-functions)
+  - [Decorators](#decorators)
+  - [Define function Decorators with `functools.wraps`](#define-function-decorators-with-functoolswraps)
+  - [Decorators function with parameter](#decorators-function-with-parameter)
 
 # OOP
 
@@ -1117,4 +1120,56 @@ d = {
 # Calling functions from the dictionary
 print(d["add"](5, 3))
 print(d["subtract"](5, 3))
+```
+
+## Decorators
+
+- A design pattern that allows you to modify or extend the behavior of a function or a class without changing its source code
+- This is achieved by "wrapping" the original function with another function (the decorator), which adds functionality before and/or after the original code runs.
+- A decorator is essentially a function that takes another function as an argument and returns a new function with enhanced functionality.
+- Decorators are often used in scenarios such as logging, authentication and memorization, allowing us to add additional functionality to existing functions or methods in a clean, reusable way.
+- Declare
+
+```
+def decorator(func):
+    def wrapper():
+        print("Before calling the function.")
+        func()
+        print("After calling the function.")
+    return wrapper
+
+# Using the @ symbol is equivalent to calling the decorator on the function it wraps and assigning the
+# return value to the original name in the same scope
+# greet = decorator(greet)
+
+@decorator # Applying the decorator to a function
+def greet():
+    print("Hello, World!")
+
+greet()
+```
+
+## Define function Decorators with `functools.wraps`
+
+## Decorators function with parameter
+
+- Explanation of Parameters
+  - `decorator_name(func)`: This is the decorator function. It takes another function (func) as input.
+  - `**wrapper(*args, kwargs)`: A nested function that wraps func. `*args` collects positional arguments, `**kwargs` collects keyword arguments, so wrapper works with any function.
+  - `@decorator_name`: Syntax sugar for `add = decorator_name(add)`.
+
+```
+def decorator_name(func):
+    def wrapper(*args, **kwargs):
+        print("Before execution")
+        result = func(*args, **kwargs)
+        print("After execution")
+        return result
+    return wrapper
+
+@decorator_name
+def add(a, b):
+    return a + b
+
+print(add(5, 3))
 ```
