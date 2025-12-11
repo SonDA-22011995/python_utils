@@ -28,6 +28,7 @@
   - [Using raise with a custom exception.](#using-raise-with-a-custom-exception)
   - [Re-raising an exception](#re-raising-an-exception)
   - [First-class functions](#first-class-functions)
+  - [Python Docstrings - `__doc__` or `help()`](#python-docstrings---__doc__-or-help)
   - [Decorators](#decorators)
   - [Define function Decorators with `functools.wraps`](#define-function-decorators-with-functoolswraps)
   - [Decorators function with parameter](#decorators-function-with-parameter)
@@ -1120,6 +1121,38 @@ d = {
 # Calling functions from the dictionary
 print(d["add"](5, 3))
 print(d["subtract"](5, 3))
+```
+
+## Python Docstrings - `__doc__` or `help()`
+
+- Docstrings (Documentation Strings) are special strings used to document Python code. They provide a description of what a module, class, function or method does.
+- Syntax
+  - Declared using triple quotes (`'''` or `"""`)
+  - Written just below the definition of a function, class, or module
+  - Unlike comments (#), docstrings can be accessed at runtime using `__doc__` or `help()`
+
+```
+def my_function():
+    """Demonstrates triple quotes docstring and does nothing."""
+    return None
+
+print("Using __doc__:")
+print(my_function.__doc__)
+
+print("Using help():")
+help(my_function)
+```
+
+Output
+
+```
+Using __doc__:
+Demonstrates triple quotes docstring and does nothing.
+Using help():
+Help on function my_function in module __main__:
+
+my_function()
+    Demonstrates triple quotes docstring and does no...
 ```
 
 ## Decorators
