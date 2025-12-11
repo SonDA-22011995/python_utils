@@ -1345,6 +1345,7 @@ print(b)
 ```
 
 - Mutable objects include `liit`, `dict`, `set`, `bytearray`, custom classes (User-defined classes are generally mutable by default)
+- When two variables refer to the same mutable object, modifying the object through one variable will affect the value accessed by the other.
 
 ## Immutable objects
 
