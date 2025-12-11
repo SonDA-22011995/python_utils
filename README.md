@@ -32,6 +32,7 @@
   - [Decorators](#decorators)
   - [Define function Decorators with `functools.wraps`](#define-function-decorators-with-functoolswraps)
   - [Decorators function with parameter](#decorators-function-with-parameter)
+  - [Decorators with parameter - A decorator factory](#decorators-with-parameter---a-decorator-factory)
 
 # OOP
 
@@ -1247,4 +1248,74 @@ def add(a, b):
     return a + b
 
 print(add(5, 3))
+```
+
+## Decorators with parameter - A decorator factory
+
+- Let's simplify this example now, going back to a single decorator: max_result(). We
+  want to make it so that we can decorate different functions with different thresholds,
+  as we don't want to write one decorator for each threshold. Let's therefore amend
+  max_result() so that it allows us to decorate functions by specifying the threshold
+  dynamicall
+
+- Before: We want a decorator that prints an error message when the result of a function is greater than a certain threshold
+
+```
+from time import time
+from functools import wraps
+def measure(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        t = time()
+        result = func(*args, **kwargs)
+        print(func.__name__, 'took:', time() - t)
+        return result
+    return wrapper
+
+def max_result(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        if result > 100:
+            print(
+                f'Result is too big ({result}). '
+                'Max allowed is 100.'
+            )
+        return result
+    return wrapper
+
+@measure
+@max_result
+def cube(n):
+    return n ** 3
+
+print(cube(2))
+print(cube(5))
+```
+
+- After
+
+```
+# decorators/decorators.factory.py
+from functools import wraps
+
+def max_result(threshold):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            if result > threshold:
+                print(
+                    f'Result is too big ({result}). '
+                    f'Max allowed is {threshold}.'
+                )
+            return result
+        return wrapper
+    return decorator
+
+@max_result(75)
+def cube(n):
+    return n ** 3
+
+print(cube(5))
 ```
