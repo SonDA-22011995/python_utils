@@ -38,6 +38,7 @@
   - [Mutable vs. Immutable in Python](#mutable-vs-immutable-in-python)
   - [Don't use mutable defaults parameters](#dont-use-mutable-defaults-parameters)
   - [Argument vs Parameter](#argument-vs-parameter)
+  - [Set Up Virtual Environment and Install Dependencies](#set-up-virtual-environment-and-install-dependencies)
 
 # OOP
 
@@ -1371,6 +1372,50 @@ print(b)
 
 ## Don't use mutable defaults parameters
 
+- **BAD**
+
+```
+class Student:
+    def __init__(self, name: str, grades: list[int] = []):  # BAD
+        self.name = name
+        self.grades = grades
+
+    def take_exam(self, result: int):
+        self.grades.append(result)
+
+bob = Student('Bob')
+rolf = Student('Rof')
+
+bob.take_exam(90)
+
+print(bob.grades)
+print(rolf.grades)
+
+# Print same output is [90]
+```
+
+- Why This Happens
+
+  - Default parameter values are evaluated once, when the function is defined—not each time it is called.
+
+  - So the default [] (empty list) is created only once.
+
+  - All objects using that default will share the same list in memory.
+
+  - Thus bob.grades and rolf.grades point to the same list, causing unexpected behavior.
+
+- Correct approach
+
+```
+from typing import Optional
+
+class Student:
+    def __init__(self, name: str, grades: Optional[list[int]] = None):
+        self.name = name
+        self.grades = grades or []
+
+```
+
 ## Argument vs Parameter
 
 - In programming, the key difference is that a **parameter** is a **variable** in a function's definition (a placeholder), while an argument is the actual value passed to that function when it is called (the specific data).
@@ -1381,3 +1426,36 @@ print(b)
 | **Location**      | Defined in the function header (declaration).                | Provided in the function call statement.                        |
 | **Timing**        | Specified at compile-time/definition.                        | Passed at run-time/execution.                                   |
 | **Also Known As** | Formal parameter, formal argument.                           | Actual parameter, actual argument.                              |
+
+## Set Up Virtual Environment and Install Dependencies
+
+- Step 1: Create a virtual environment (recommended).
+
+```
+python -m venv venv
+
+# python -m venv <<folder_name>>
+```
+
+- Step 2: Activate the virtual environment
+  - On the window
+
+```
+venv\Scripts\activate
+
+# <<folder_name>>\Scripts\activate
+```
+
+- On macOS / Linux:
+
+```
+source venv/bin/activate
+
+# source <<folder_name>>/bin/activate
+```
+
+- Step 3: Install required libraries from requirements.txt
+
+```
+pip install -r requirements.txt
+```
