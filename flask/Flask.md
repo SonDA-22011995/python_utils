@@ -80,7 +80,8 @@ def get_stores():
 
 ## URL variables | Route parameters
 
-- How to Use: ou define a route parameter in the URL rule within the `@app.route()` decorator using angle brackets `<variable_name>`. The name you use in the URL must match the name of the argument in the corresponding Python function.
+- How to Use: define a route parameter in the URL rule within the `@app.route()` decorator using angle brackets `<variable_name>`.
+- The name you use in the URL must match the name of the argument in the corresponding Python function. Your function then receives the `<variable_name>` as a keyword argument
 
 - Basic example
 
