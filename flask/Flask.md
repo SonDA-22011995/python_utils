@@ -1,6 +1,9 @@
 - [Flask Terminology](#flask-terminology)
   - [`route(rule, **options)`](#routerule-options)
-  - [`get(rule, **option)`](#getrule-option)
+  - [`class flask.Flask`](#class-flaskflask)
+    - [`get(rule, **option)`](#getrule-option)
+    - [`post(rule, **options)`](#postrule-options)
+  - [](#)
   - [JSON](#json)
 - [Flask REST API](#flask-rest-api)
   - [First REST API](#first-rest-api)
@@ -13,6 +16,8 @@
 
 - Decorate a view function to register it with the given URL rule and options
 - The endpoint decorator `@app.route("/")` registers the route's endpoint with Flask.
+- Parameters:
+  - `rule` (str) – The URL rule string.
 
 ```
 from flask import Flask
@@ -25,7 +30,13 @@ def home():
 
 ```
 
-## `get(rule, **option)`
+## `class flask.Flask`
+
+- class flask.Flask(import_name, static_url_path=None, static_folder='static', static_host=None, host_matching=False, subdomain_matching=False, template_folder='templates', instance_path=None, instance_relative_config=False, root_path=None)
+
+- The flask object implements a WSGI application and acts as the central object. It is passed the name of the module or package of the application. Once it is created it will act as a central registry for the view functions, the URL rules, template configuration and much more.
+
+### `get(rule, **option)`
 
 - Shortcut for route() with methods=["GET"].
 
@@ -34,6 +45,12 @@ def home():
 def get_stores():
     return {"stores": stores}
 ```
+
+### `post(rule, **options)`
+
+- Shortcut for route() with methods=["POST"].
+
+##
 
 ## JSON
 
