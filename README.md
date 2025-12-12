@@ -46,6 +46,7 @@
     - [3xx — Redirection](#3xx--redirection)
     - [4xx — Client Errors](#4xx--client-errors)
     - [5xx — Server Errors](#5xx--server-errors)
+  - [Iterable vs Iterator](#iterable-vs-iterator)
 - [Python Built-in Functions](#python-built-in-functions)
   - [Basic I/O \& Introspection](#basic-io--introspection)
   - [Sequence \& Iterable Operations](#sequence--iterable-operations)
@@ -1546,6 +1547,22 @@ pip install -r requirements.txt
 | **505** | HTTP Version Not Supported |
 | **507** | Insufficient Storage       |
 | **508** | Loop Detected              |
+
+## Iterable vs Iterator
+
+| **Criteria**                       | **Iterable**                                   | **Iterator**                                                                   |
+| ---------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Definition**                     | An object that can be looped over (loopable).  | An object that can return the next element when `next()` is called.            |
+| **Purpose**                        | Stores data that can be iterated.              | Retrieves elements from an iterable one at a time, maintaining internal state. |
+| **Has `__iter__()`?**              | ✔ Yes                                          | ✔ Yes (returns itself)                                                         |
+| **Has `__next__()`?**              | ❌ No                                          | ✔ Yes                                                                          |
+| **Usable with `for` loop?**        | ✔ Yes                                          | ✔ Yes                                                                          |
+| **Usable directly with `next()`?** | ❌ No                                          | ✔ Yes                                                                          |
+| **Maintains iteration state?**     | ❌ No                                          | ✔ Yes (remembers current position)                                             |
+| **Examples**                       | `list`, `tuple`, `dict`, `set`, `str`, `range` | `iter(list)`, generator, file object                                           |
+| **How to obtain an iterator?**     | Call `iter(x)`                                 | Already an iterator                                                            |
+| **When elements are exhausted**    | No error                                       | Raises `StopIteration`                                                         |
+| **Memory usage**                   | May hold all items in memory                   | Typically uses less memory (generators produce items lazily)                   |
 
 # Python Built-in Functions
 
