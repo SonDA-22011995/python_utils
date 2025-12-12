@@ -4,9 +4,11 @@
     - [`route(rule, **options)`](#routerule-options)
     - [`get(rule, **option)`](#getrule-option)
     - [`post(rule, **options)`](#postrule-options)
-  - [](#)
+  - [`class flask.Request`](#class-flaskrequest)
+    - [`get_json`](#get_json)
 - [Flask REST API](#flask-rest-api)
   - [First REST API](#first-rest-api)
+  - [Create item in REST API](#create-item-in-rest-api)
 - [Flask CLI](#flask-cli)
   - [flask run](#flask-run)
 - [JSON](#json)
@@ -64,7 +66,15 @@ def get_stores():
 
 - Shortcut for route() with methods=["POST"].
 
-##
+## `class flask.Request`
+
+- The request object used by default in Flask. Remembers the matched endpoint and view arguments.
+
+### `get_json`
+
+- get_json(force=False, silent=False, cache=True)
+- Parse data as JSON.
+- If the mimetype does not indicate JSON (`application/json`, see `is_json`), or parsing fails, `on_json_loading_failed()` is called and its return value is used as the return value. By default this raises a 415 Unsupported Media Type resp.
 
 # Flask REST API
 
@@ -80,6 +90,21 @@ stores = [{"name": "My Store", "items": [{"name": "my item", "price": 15.99}]}]
 @app.get("/store")
 def get_stores():
     return {"stores": stores}
+```
+
+## Create item in REST API
+
+```
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.post("/store")
+def create_store():
+    request_data = request.get_json()
+    new_store = {"name": request_data["name"], "items": []}
+    stores.append(new_store)
+    return new_store, 201
 ```
 
 # Flask CLI
