@@ -9,7 +9,6 @@
   - [Don't use mutable defaults parameters](#dont-use-mutable-defaults-parameters)
 - [Function](#function)
   - [Argument vs Parameter](#argument-vs-parameter)
-  - [Set Up Virtual Environment and Install Dependencies](#set-up-virtual-environment-and-install-dependencies)
   - [First-class functions](#first-class-functions)
   - [Lambda functions](#lambda-functions)
   - [Destructuring](#destructuring)
@@ -50,6 +49,7 @@
     - [4xx — Client Errors](#4xx--client-errors)
     - [5xx — Server Errors](#5xx--server-errors)
   - [Iterable vs Iterator](#iterable-vs-iterator)
+  - [Set Up Virtual Environment and Install Dependencies](#set-up-virtual-environment-and-install-dependencies)
 - [Python Built-in Functions](#python-built-in-functions)
   - [Basic I/O \& Introspection](#basic-io--introspection)
   - [Sequence \& Iterable Operations](#sequence--iterable-operations)
@@ -330,39 +330,6 @@ class Student:
 | **Location**      | Defined in the function header (declaration).                | Provided in the function call statement.                        |
 | **Timing**        | Specified at compile-time/definition.                        | Passed at run-time/execution.                                   |
 | **Also Known As** | Formal parameter, formal argument.                           | Actual parameter, actual argument.                              |
-
-## Set Up Virtual Environment and Install Dependencies
-
-- Step 1: Create a virtual environment (recommended).
-
-```
-python -m venv venv
-
-# python -m venv <<folder_name>>
-```
-
-- Step 2: Activate the virtual environment
-  - On the window
-
-```
-venv\Scripts\activate
-
-# <<folder_name>>\Scripts\activate
-```
-
-- On macOS / Linux:
-
-```
-source venv/bin/activate
-
-# source <<folder_name>>/bin/activate
-```
-
-- Step 3: Install required libraries from requirements.txt
-
-```
-pip install -r requirements.txt
-```
 
 ## First-class functions
 
@@ -1598,6 +1565,39 @@ print(b)
 | **How to obtain an iterator?**     | Call `iter(x)`                                 | Already an iterator                                                            |
 | **When elements are exhausted**    | No error                                       | Raises `StopIteration`                                                         |
 | **Memory usage**                   | May hold all items in memory                   | Typically uses less memory (generators produce items lazily)                   |
+
+## Set Up Virtual Environment and Install Dependencies
+
+- Step 1: Create a virtual environment (recommended).
+
+```
+python -m venv venv
+
+# python -m venv <<folder_name>>
+```
+
+- Step 2: Activate the virtual environment
+  - On the window
+
+```
+venv\Scripts\activate
+
+# <<folder_name>>\Scripts\activate
+```
+
+- On macOS / Linux:
+
+```
+source venv/bin/activate
+
+# source <<folder_name>>/bin/activate
+```
+
+- Step 3: Install required libraries from requirements.txt
+
+```
+pip install -r requirements.txt
+```
 
 # Python Built-in Functions
 
