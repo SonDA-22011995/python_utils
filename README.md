@@ -29,6 +29,7 @@
   - [Absolute Imports](#absolute-imports)
   - [Relative Imports](#relative-imports)
   - [`__init__` file](#__init__-file)
+  - [Set Up Virtual Environment and Install Dependencies](#set-up-virtual-environment-and-install-dependencies)
 - [Other](#other)
   - [Format datetime to string](#format-datetime-to-string)
   - [index of the day of the week from a date in Python](#index-of-the-day-of-the-week-from-a-date-in-python)
@@ -50,7 +51,6 @@
     - [4xx — Client Errors](#4xx--client-errors)
     - [5xx — Server Errors](#5xx--server-errors)
   - [Iterable vs Iterator](#iterable-vs-iterator)
-  - [Set Up Virtual Environment and Install Dependencies](#set-up-virtual-environment-and-install-dependencies)
 - [Python Built-in Functions](#python-built-in-functions)
   - [Basic I/O \& Introspection](#basic-io--introspection)
   - [Sequence \& Iterable Operations](#sequence--iterable-operations)
@@ -1129,6 +1129,39 @@ mypackage.module2.func2()
 # This is func2 from module2
 ```
 
+## Set Up Virtual Environment and Install Dependencies
+
+- Step 1: Create a virtual environment (recommended).
+
+```
+python -m venv venv
+
+# python -m venv <<folder_name>>
+```
+
+- Step 2: Activate the virtual environment
+  - On the window
+
+```
+venv\Scripts\activate
+
+# <<folder_name>>\Scripts\activate
+```
+
+- On macOS / Linux:
+
+```
+source venv/bin/activate
+
+# source <<folder_name>>/bin/activate
+```
+
+- Step 3: Install required libraries from requirements.txt
+
+```
+pip install -r requirements.txt
+```
+
 # Other
 
 ## Format datetime to string
@@ -1568,39 +1601,6 @@ print(b)
 | **How to obtain an iterator?**     | Call `iter(x)`                                 | Already an iterator                                                            |
 | **When elements are exhausted**    | No error                                       | Raises `StopIteration`                                                         |
 | **Memory usage**                   | May hold all items in memory                   | Typically uses less memory (generators produce items lazily)                   |
-
-## Set Up Virtual Environment and Install Dependencies
-
-- Step 1: Create a virtual environment (recommended).
-
-```
-python -m venv venv
-
-# python -m venv <<folder_name>>
-```
-
-- Step 2: Activate the virtual environment
-  - On the window
-
-```
-venv\Scripts\activate
-
-# <<folder_name>>\Scripts\activate
-```
-
-- On macOS / Linux:
-
-```
-source venv/bin/activate
-
-# source <<folder_name>>/bin/activate
-```
-
-- Step 3: Install required libraries from requirements.txt
-
-```
-pip install -r requirements.txt
-```
 
 # Python Built-in Functions
 
