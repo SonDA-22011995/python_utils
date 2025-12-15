@@ -24,7 +24,10 @@
   - [Decorators function with parameter](#decorators-function-with-parameter)
   - [Decorators with parameter - A decorator factory](#decorators-with-parameter---a-decorator-factory)
 - [Generator](#generator)
+  - [Why Do We Need Generators?](#why-do-we-need-generators)
   - [Iterable vs Iterator](#iterable-vs-iterator)
+  - [Yield vs Return](#yield-vs-return)
+  - [`next()` function](#next-function)
   - [Generator functions](#generator-functions)
   - [Generator expressions](#generator-expressions)
 - [Package and module](#package-and-module)
@@ -913,6 +916,14 @@ print(cube(5))
 
 # Generator
 
+## Why Do We Need Generators?
+
+- Memory Efficient : Handle large or infinite data without loading everything into memory.
+- No List Overhead : Yield items one by one, avoiding full list creation.
+- Lazy Evaluation : Compute values only when needed, improving performance.
+- Support Infinite Sequences : Ideal for generating unbounded data like Fibonacci series.
+- Pipeline Processing : Chain generators to process data in stages efficiently.
+
 ## Iterable vs Iterator
 
 | **Criteria**                       | **Iterable**                                   | **Iterator**                                                                   |
@@ -929,13 +940,77 @@ print(cube(5))
 | **When elements are exhausted**    | No error                                       | Raises `StopIteration`                                                         |
 | **Memory usage**                   | May hold all items in memory                   | Typically uses less memory (generators produce items lazily)                   |
 
+## Yield vs Return
+
+- **Yield**: is used in generator functions to provide a sequence of values over time. When yield is executed, it pauses the function, returns the current value and retains the state of the function. This allows the function to continue from same point when called again, making it ideal for generating large or complex sequences efficiently.
+- **Return**: is used to exit a function and return a final value. Once return is executed, function is terminated immediately and no state is retained. This is suitable for cases where a single result is needed from a function.
+
+## `next()` function
+
+- Each call to `next()` on the generator object resumes execution right after the yield statement, where it last left off.
+- Exception: `StopIteration`
+
+```
+# first.n.squares.manual.py
+def get_squares_gen(n):
+    for x in range(n):
+        yield x ** 2
+
+squares = get_squares_gen(4) # this creates a generator object
+
+print(squares) # <generator object get_squares_gen at 0x10dd...>
+print(next(squares)) # prints: 0
+print(next(squares)) # prints: 1
+print(next(squares)) # prints: 4
+print(next(squares)) # prints: 9
+# the following raises StopIteration, the generator is exhausted,
+# any further call to next will keep raising StopIteration
+print(next(squares))
+```
+
 ## Generator functions
 
 - These are very similar to regular functions, but instead
   of returning results through return statements, they use yield, which allows
   them to suspend and resume their state between each call.
 
+- Syntax
+
+```
+def generator_function_name(parameters):
+    # Your code here
+    yield expression
+    # Additional code can follow
+```
+
+- The result of the two print statements will be the same: [0, 1, 4, 9, 16, 25, 36,
+  49, 64, 81].
+  - `get_squares()`: is a classic function that collects all the squares of numbers in `[0,..,n]` in a list, and returns it
+  - `get_squares_gen()`: is a generator and behaves very differently. Each time the interpreter reaches the yield line, its execution is suspended. The only reason those print statements return the same result is because we fed `get_squares_gen()` to the `list()` constructor
+
+```
+# first.n.squares.py
+def get_squares(n): # classic function approach
+    return [x ** 2 for x in range(n)]
+
+print(get_squares(10))
+
+def get_squares_gen(n): # generator approach
+    for x in range(n):
+        yield x ** 2 # we yield, we don't return
+
+print(list(get_squares_gen(10)))
+```
+
 ## Generator expressions
+
+- **Generator expressions** are a concise way to create generators. They are similar to list comprehensions but use parentheses instead of square brackets and are more memory efficient.
+
+- Syntax
+
+```
+(expression for item in iterable)
+```
 
 # Package and module
 
