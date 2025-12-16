@@ -12,6 +12,9 @@
   - [Create store in REST API](#create-store-in-rest-api)
   - [Create items in our REST API](#create-items-in-our-rest-api)
 - [Flask CLI](#flask-cli)
+  - [Environment Variables From dotenv](#environment-variables-from-dotenv)
+    - [FLASK\_APP](#flask_app)
+    - [FLASK\_DEBUG](#flask_debug)
   - [flask run](#flask-run)
 - [JSON](#json)
 
@@ -180,9 +183,43 @@ def create_item(name):
 
 # Flask CLI
 
+## Environment Variables From dotenv
+
+- If `python-dotenv` is installed, running the flask command will set environment variables defined in the files `.env` and `.flaskenv`. You can also specify an extra file to load with the `--env-file` option. Dotenv files can be used to avoid having to set `--app` or `FLASK_APP` manually, and to set configuration using environment variables similar to how some deployment services work.
+- The files are only loaded by the flask command or calling `run()`. If you would like to load these files when running in production, you should call `load_dotenv()` manually.
+
+### FLASK_APP
+
+- option is used to specify how to load the application.
+- `FLASK_APP = src/hello`: Sets the current working directory to src then imports hello.
+
+- `FLASK_APP = hello.web`: Imports the path hello.web.
+
+- `FLASK_APP = hello:app2`: Uses the app2 Flask instance in hello.
+
+- `FLASK_APP = 'hello:create_app("dev")'`: The create_app factory in hello is called with the string `'dev'` as the argument
+
+### FLASK_DEBUG
+
+- Debug mode is enabled.
+- Default: `Flase`
+
 ## flask run
 
 - Run web application
+- Parameter
+
+  - `host` (str | None) – the hostname to listen on. Set this to `'0.0.0.0'` to have the server available externally as well. Defaults to `'127.0.0.1'` or the host in the SERVER_NAME config variable if present.
+
+  - `port` (int | None) – the port of the webserver. Defaults to `5000` or the port defined in the SERVER_NAME config variable if present.
+
+  - `debug` (bool | None) – if given, enable or disable debug mode. See `debug`.
+
+  - `load_dotenv` (bool) – Load the nearest .env and .flaskenv files to set environment variables. Will also change the working directory to the directory containing the first file found.
+
+  - `options` (Any) – the `options` to be forwarded to the underlying Werkzeug server. See werkzeug.serving.run_simple() for more information.
+
+- Example: `flask run --host=0.0.0.0 --port=5000 --debug`
 
 # JSON
 
