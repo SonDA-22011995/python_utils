@@ -78,6 +78,7 @@
   - [Numeric Helpers](#numeric-helpers)
   - [File \& Execution](#file--execution)
   - [OOP Helpers](#oop-helpers)
+  - [What does in-place mean?](#what-does-in-place-mean)
   - [List Built-in Functions \& Methods](#list-built-in-functions--methods)
   - [Dictionary Built-in Functions \& Methods](#dictionary-built-in-functions--methods)
 
@@ -1989,6 +1990,19 @@ uuid.uuid4().hex
 | `classmethod()`  | Define class method    | `@classmethod`  | —          | see OOP section      |
 | `staticmethod()` | Define static method   | `@staticmethod` | —          | see OOP section      |
 | `property()`     | Getter/setter property | `@property`     | —          | property getter      |
+
+## What does in-place mean?
+
+- The operation modifies the original object directly, instead of creating a new one.
+
+```
+a = [1, 2, 3]
+a.append(4)
+```
+
+- The list a is modified directly
+- No new list is created
+- append() returns None
 
 ## List Built-in Functions & Methods
 
