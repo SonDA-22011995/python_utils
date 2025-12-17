@@ -78,6 +78,8 @@
   - [Numeric Helpers](#numeric-helpers)
   - [File \& Execution](#file--execution)
   - [OOP Helpers](#oop-helpers)
+  - [List Built-in Functions \& Methods](#list-built-in-functions--methods)
+  - [Dictionary Built-in Functions \& Methods](#dictionary-built-in-functions--methods)
 
 # OOP
 
@@ -1988,6 +1990,39 @@ uuid.uuid4().hex
 | `staticmethod()` | Define static method   | `@staticmethod` | —          | see OOP section      |
 | `property()`     | Getter/setter property | `@property`     | —          | property getter      |
 
-```
+## List Built-in Functions & Methods
 
-```
+| Function / Method | Syntax               | Description                                         | In-place | Return Value | Example                |
+| ----------------- | -------------------- | --------------------------------------------------- | -------- | ------------ | ---------------------- |
+| append            | lst.append(x)        | Add an element to the end of the list               | ✅       | None         | a=[1,2]; a.append(3)   |
+| extend            | lst.extend(iterable) | Extend list by appending elements from an iterable  | ✅       | None         | a=[1]; a.extend([2,3]) |
+| insert            | lst.insert(i, x)     | Insert element at position i                        | ✅       | None         | a=[1,3]; a.insert(1,2) |
+| remove            | lst.remove(x)        | Remove first occurrence of value x                  | ✅       | None         | a=[1,2,2]; a.remove(2) |
+| pop               | lst.pop([i])         | Remove and return element at index i (default last) | ✅       | element      | a.pop()                |
+| clear             | lst.clear()          | Remove all elements from the list                   | ✅       | None         | a.clear()              |
+| index             | lst.index(x)         | Return index of first occurrence of x               | ❌       | int          | a.index(2)             |
+| count             | lst.count(x)         | Count occurrences of x                              | ❌       | int          | a.count(2)             |
+| sort              | lst.sort()           | Sort the list                                       | ✅       | None         | a.sort()               |
+| reverse           | lst.reverse()        | Reverse the list in place                           | ✅       | None         | a.reverse()            |
+| copy              | lst.copy()           | Return a shallow copy of the list                   | ❌       | list         | b=a.copy()             |
+| len               | len(lst)             | Return number of elements                           | ❌       | int          | len(a)                 |
+| min / max         | min(lst)             | Return smallest / largest element                   | ❌       | element      | min(a)                 |
+| sum               | sum(lst)             | Return sum of numeric elements                      | ❌       | number       | sum(a)                 |
+
+## Dictionary Built-in Functions & Methods
+
+| Function / Method | Syntax              | Description                                 | In-place | Return Value                      | Example              |
+| ----------------- | ------------------- | ------------------------------------------- | -------- | --------------------------------- | -------------------- | ---- | --- | --------- |
+| get               | d.get(k[, default]) | Return value for key k, no error if missing | ❌       | value                             | d.get('a', 0)        |
+| setdefault        | d.setdefault(k, v)  | Return value; insert key with v if missing  | ✅       | value                             | d.setdefault('a', 1) |
+| update            | d.update(other)     | Merge another dict into this one            | ✅       | None                              | d.update({'a':1})    |
+|                   | =                   | d                                           | = other  | Merge dictionaries (Python ≥ 3.9) | ✅                   | None | d   | = {'a':1} |
+| pop               | d.pop(k)            | Remove key and return its value             | ✅       | value                             | d.pop('a')           |
+| popitem           | d.popitem()         | Remove and return last key-value pair       | ✅       | (key, value)                      | d.popitem()          |
+| clear             | d.clear()           | Remove all items                            | ✅       | None                              | d.clear()            |
+| keys              | d.keys()            | Return a view of keys                       | ❌       | view                              | d.keys()             |
+| values            | d.values()          | Return a view of values                     | ❌       | view                              | d.values()           |
+| items             | d.items()           | Return a view of key-value pairs            | ❌       | view                              | d.items()            |
+| copy              | d.copy()            | Return a shallow copy of the dictionary     | ❌       | dict                              | d.copy()             |
+| len               | len(d)              | Return number of items                      | ❌       | int                               | len(d)               |
+| in                | k in d              | Check if key exists                         | ❌       | bool                              | 'a' in d             |
