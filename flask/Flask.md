@@ -24,6 +24,9 @@
   - [`flask_smorest.abort`](#flask_smorestabort)
     - [How to use](#how-to-use)
     - [Why you should use `flask_smorest.abort` in Flask](#why-you-should-use-flask_smorestabort-in-flask)
+  - [How to use Flask-Smorest `MethodViews` and `Blueprints`](#how-to-use-flask-smorest-methodviews-and-blueprints)
+    - [`Blueprints`](#blueprints)
+    - [MethodViews](#methodviews)
 - [JSON](#json)
 
 # Flask Terminology
@@ -318,6 +321,43 @@ def view():
 - Consistent and centralized error responses
 - Correct HTTP semantics
 - Better scalability and maintainability
+
+## How to use Flask-Smorest `MethodViews` and `Blueprints`
+
+### `Blueprints`
+
+- The Blueprint arguments are the same as the Flask Blueprint1, with an added optional description keyword argument:
+- **stores** is the name of the blueprint. This will be shown in the documentation and is prepended to the endpoint names when you use url_for (we won't use it).
+  `__name__` is the **import name**.
+- The description will be shown in the documentation UI.
+
+```
+# resources/store.py
+import uuid
+from flask import request
+from flask.views import MethodView
+from flask_smorest import Blueprint, abort
+from db import stores
+
+
+blp = Blueprint("stores", __name__, description="Operations on stores")
+
+```
+
+### MethodViews
+
+- The endpoint is associated to the MethodView class. Here, the class is called Store and the endpoint is `/store/<string:store_id>`.
+- There are two methods inside the Store class: get and delete. These are going to map directly to `GET` `/store/<string:store_id>` and `DELETE` `/store/<string:store_id>`.
+
+```
+@blp.route("/store/<string:store_id>")
+class Store(MethodView):
+    def get(self, store_id):
+        pass
+
+    def delete(self, store_id):
+        pass
+```
 
 # JSON
 
