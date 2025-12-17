@@ -20,6 +20,9 @@
   - [flask run](#flask-run)
 - [Flask-Smorest](#flask-smorest)
   - [Why use Flask-Smorest](#why-use-flask-smorest)
+  - [`flask_smorest.abort`](#flask_smorestabort)
+    - [How to use](#how-to-use)
+    - [Why you should use `flask_smorest.abort` in Flask](#why-you-should-use-flask_smorestabort-in-flask)
 - [JSON](#json)
 
 # Flask Terminology
@@ -270,6 +273,46 @@ FLASK_RUN_HOST=0.0.0.0
   - Developer experience in production projects. The main point here was: how easy is it to produce API documentation with the library of choice. Hundreds of students have asked me how to integrate Swagger in their APIs, so it would be great if the library we teach gave it to you out of the box.
 
 - Flask-Smorest is the most well-rounded. It ticks all the boxes above
+
+## `flask_smorest.abort`
+
+### How to use
+
+```
+from flask_smorest import abort
+
+@app.get("/store/<string:store_id>")
+def get_store(store_id):
+    try:
+        # Here you might also want to add the items in this store
+        # We'll do that later on in the course
+        return stores[store_id]
+    except KeyError:
+        abort(404, message="Store not found.")
+```
+
+### Why you should use `flask_smorest.abort` in Flask
+
+- Errors are control flow, not normal data
+- `abort()` immediately stops execution
+
+```
+def service():
+    if invalid:
+        abort(400)
+
+def view():
+    service()
+    save_to_db()  # ❌ will not be executed
+
+# With return, you must propagate the error through every layer.
+# With abort(), you raise the error once and execution stops immediately.
+```
+
+- Clear separation of concerns
+- Consistent and centralized error responses
+- Correct HTTP semantics
+- Better scalability and maintainability
 
 # JSON
 
