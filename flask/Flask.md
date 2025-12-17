@@ -13,8 +13,9 @@
   - [Create items in our REST API](#create-items-in-our-rest-api)
 - [Flask CLI](#flask-cli)
   - [Environment Variables From dotenv](#environment-variables-from-dotenv)
-    - [FLASK\_APP](#flask_app)
-    - [FLASK\_DEBUG](#flask_debug)
+    - [FLASK_APP](#flask_app)
+    - [FLASK_DEBUG](#flask_debug)
+    - [FLASK_RUN_PORT](#flask_run_port)
   - [flask run](#flask-run)
 - [JSON](#json)
 
@@ -203,6 +204,14 @@ def create_item(name):
 
 - Debug mode is enabled.
 - Default: `Flase`
+
+### FLASK_RUN_PORT
+
+- To set the port for the run command
+
+```
+FLASK_RUN_PORT=9999
+```
 
 ## flask run
 
