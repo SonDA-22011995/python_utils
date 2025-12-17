@@ -58,6 +58,17 @@
   - [Immutable objects](#immutable-objects)
   - [Mutable vs. Immutable in Python](#mutable-vs-immutable-in-python)
   - [API - Application programing interface](#api---application-programing-interface)
+  - [HTTP Request](#http-request)
+    - [What is an HTTP Request?](#what-is-an-http-request)
+    - [Client–Server Model](#clientserver-model)
+    - [Structure of an HTTP Request](#structure-of-an-http-request)
+    - [Example](#example)
+    - [Request Line](#request-line)
+    - [HTTP Methods](#http-methods)
+    - [HTTP Headers](#http-headers)
+    - [Request Body](#request-body)
+    - [Query Parameters](#query-parameters)
+    - [HTTP Request vs HTTP Response](#http-request-vs-http-response)
   - [Responses HTTP codes](#responses-http-codes)
     - [1xx — Informational](#1xx--informational)
     - [2xx — Success](#2xx--success)
@@ -1799,6 +1810,143 @@ print(b)
 ## API - Application programing interface
 
 - An Application programing interface (API) is a set of commands, functions, protocals and objects that programers can use to create software or interact with an external system
+
+## HTTP Request
+
+### What is an HTTP Request?
+
+An **HTTP request** is a message sent by a **client** (browser, mobile app, API client) to a **server** to ask for a resource or to perform an action.
+
+Examples:
+
+- A browser requests a web page
+- A frontend app requests data from a backend API
+- A client sends data to create or update a record
+
+HTTP requests follow the **HTTP (HyperText Transfer Protocol)** standard.
+
+---
+
+### Client–Server Model
+
+HTTP works based on a **client–server architecture**:
+
+1. The **client** sends an HTTP request
+2. The **server** processes the request
+3. The **server** returns an HTTP response
+
+The server does **nothing** until it receives a request.
+
+---
+
+### Structure of an HTTP Request
+
+An HTTP request consists of **four main parts**:
+
+1. Request Line
+2. Headers
+3. Blank Line
+4. Body (optional)
+
+### Example
+
+```
+POST /users HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+Authorization: Bearer token123
+
+{
+    "name": "Alice",
+    "email": "alice@example.com
+"
+}
+```
+
+### Request Line
+
+- The request line contains: `METHOD /path HTTP/version`
+
+```
+GET /users/1 HTTP/1.1
+```
+
+- Components:
+
+  - **HTTP Method**– what action the client wants to perform
+  - **Path (URL)** – the resource being accessed
+  - **HTTP Version** – protocol version (HTTP/1.1, HTTP/2)
+
+### HTTP Methods
+
+- HTTP methods describe the intention of the request.
+
+  | Method | Purpose | Description                          |
+  | ------ | ------- | ------------------------------------ |
+  | GET    | Read    | Retrieve data (no data modification) |
+  | POST   | Create  | Create a new resource                |
+  | PUT    | Update  | Replace an existing resource         |
+  | PATCH  | Update  | Partially update a resource          |
+  | DELETE | Delete  | Remove a resource                    |
+
+### HTTP Headers
+
+- Headers provide metadata about the request.
+
+- Common request headers:
+
+| Header        | Description                |
+| ------------- | -------------------------- |
+| Host          | Target server              |
+| Content-Type  | Format of request body     |
+| Authorization | Authentication credentials |
+| User-Agent    | Client information         |
+| Accept        | Expected response format   |
+
+- Example:
+
+```
+Content-Type: application/json
+```
+
+### Request Body
+
+- The request body contains data sent to the server.
+
+- Used mainly with POST, PUT, PATCH
+
+- Not typically used with GET
+
+- Common body formats: JSON, Form data, XML
+
+- Example (JSON):
+
+```
+{
+    "username": "john",
+    "password": "secret"
+}
+```
+
+### Query Parameters
+
+- Query parameters are part of the URL and are used to pass filtering or optional data.
+- Start with `?`
+- Separated by `&`
+
+Example:
+
+```
+GET /users?page=2&limit=10
+```
+
+### HTTP Request vs HTTP Response
+
+| HTTP Request              | HTTP Response               |
+| ------------------------- | --------------------------- |
+| Sent by client            | Sent by server              |
+| Asks for an action        | Returns result              |
+| Contains method & headers | Contains status code & data |
 
 ## Responses HTTP codes
 
