@@ -4,6 +4,7 @@
     - [`route(rule, **options)`](#routerule-options)
     - [`get(rule, **option)`](#getrule-option)
     - [`post(rule, **options)`](#postrule-options)
+    - [`delete(rule, **options)`](#deleterule-options)
   - [`class flask.Request`](#class-flaskrequest)
     - [`get_json`](#get_json)
   - [URL variables | Route parameters](#url-variables--route-parameters)
@@ -77,6 +78,10 @@ def get_stores():
 ### `post(rule, **options)`
 
 - Shortcut for route() with methods=["POST"].
+
+### `delete(rule, **options)`
+
+Shortcut for route() with methods=["DELETE"].
 
 ## `class flask.Request`
 
