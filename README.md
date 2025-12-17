@@ -81,6 +81,7 @@
   - [What does in-place mean?](#what-does-in-place-mean)
   - [List Built-in Functions \& Methods](#list-built-in-functions--methods)
   - [Dictionary Built-in Functions \& Methods](#dictionary-built-in-functions--methods)
+  - [Merge dictionaries (Python ≥ 3.9)](#merge-dictionaries-python--39)
 
 # OOP
 
@@ -2039,3 +2040,37 @@ a.append(4)
 | copy              | d.copy()            | Return a shallow copy of the dictionary     | ❌       | dict         | d.copy()             |
 | len               | len(d)              | Return number of items                      | ❌       | int          | len(d)               |
 | in                | k in d              | Check if key exists                         | ❌       | bool         | 'a' in d             |
+
+## Merge dictionaries (Python ≥ 3.9)
+
+- This merge creates an entirely new dict object z where we unpack every value from x and y. This way of merging two dictionaries feels unnatural and hardly obvious. If both dictionaries have the same keys, the values of dictionary x are overwritten by the values of dictionary y.
+
+```
+x = {"key1": "value1 from x", "key2": "value2 from x"}
+y = {"key2": "value2 from y", "key3": "value3 from y"}
+
+z = {**x, **y}
+print(z)
+# {'key1': 'value1 from x', 'key2': 'value2 from y', 'key3': 'value3 from y'}
+```
+
+- If the key already exists, the new value will overwrite the old one.
+
+```
+# before merging
+x = {"key1": "value1 from x", "key2": "value2 from x"}
+y = {"key2": "value2 from y", "key3": "value3 from y"}
+print(id(x))  # 2670466407744
+print(id(y))  # 2670466407808
+
+# after merging
+x | y
+print(id(x))  # 2670466407744
+print(id(y))  # 2670466407808
+
+# assigning the expression to the variable `z`
+z = x | y
+print(id(z))  # 2670466542912
+print(z is x)  # False
+print(z is y)  # False
+```
