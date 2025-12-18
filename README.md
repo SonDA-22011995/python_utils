@@ -81,6 +81,11 @@
     - [UUIDs ideal for](#uuids-ideal-for)
     - [Common UUID Versions](#common-uuid-versions)
     - [How to use](#how-to-use)
+  - [SQLAlchemy Database URL with Special Characters](#sqlalchemy-database-url-with-special-characters)
+    - [Connection URL Format](#connection-url-format)
+    - [Common Issue with Special Characters](#common-issue-with-special-characters)
+    - [Solution: URL Encode Special Characters](#solution-url-encode-special-characters)
+    - [Encode Password Programmatically in Python](#encode-password-programmatically-in-python)
 - [Python Built-in Functions](#python-built-in-functions)
   - [Basic I/O \& Introspection](#basic-io--introspection)
   - [Sequence \& Iterable Operations](#sequence--iterable-operations)
@@ -93,6 +98,9 @@
   - [List Built-in Functions \& Methods](#list-built-in-functions--methods)
   - [Dictionary Built-in Functions \& Methods](#dictionary-built-in-functions--methods)
   - [Merge dictionaries (Python ≥ 3.9)](#merge-dictionaries-python--39)
+- [Python Libraries](#python-libraries)
+  - [Flask_smorest](#flask_smorest)
+  - [marshmallow](#marshmallow)
 
 # OOP
 
@@ -2064,6 +2072,53 @@ import uuid
 uuid.uuid4().hex
 ```
 
+## SQLAlchemy Database URL with Special Characters
+
+- When using SQLAlchemy to connect to a PostgreSQL database, you need to pay attention to how the database URL is constructed. Special characters in the username or password (like `@`, `:`, `/`) can cause connection errors.
+
+### Connection URL Format
+
+- Syntax
+
+```
+dialect+driver://username:password@host:port/database
+```
+
+- Example
+
+```
+postgresql+psycopg2://username:password@localhost:5432/mydatabase
+```
+
+### Common Issue with Special Characters
+
+- If your password contains `@`, `:`, or other special characters, a URL like this:
+
+```
+postgresql+psycopg2://sonda:Son@22011995@localhost:5432/rest_api_flask_python
+
+# will fail with:
+# sqlalchemy.exc.OperationalError: could not translate host name "22011995@localhost" to address
+```
+
+- Reason: SQLAlchemy interprets the first @ as the separator between password and host, so the host is parsed incorrectly.
+
+### Solution: URL Encode Special Characters
+
+- Encode special characters in the username or password using percent-encoding.
+- Example: `@` → `%40`.
+
+### Encode Password Programmatically in Python
+
+```
+from urllib.parse import quote_plus
+
+password = "Son@22011995"
+encoded_password = quote_plus(password)  # returns 'Son%4022011995'
+
+db_url = f"postgresql+psycopg2://sonda:{encoded_password}@localhost:5432/rest_api_flask_python"
+```
+
 # Python Built-in Functions
 
 ## Basic I/O & Introspection
@@ -2222,3 +2277,9 @@ print(id(z))  # 2670466542912
 print(z is x)  # False
 print(z is y)  # False
 ```
+
+# Python Libraries
+
+## Flask_smorest
+
+## marshmallow
