@@ -20,7 +20,7 @@
   - [Mixing Positional and Arbitrary Arguments](#mixing-positional-and-arbitrary-arguments)
   - [Arbitrary Keyword Arguments](#arbitrary-keyword-arguments)
   - [Type hint](#type-hint)
-  - [Decorators](#decorators)
+- [Decorators](#decorators)
   - [Define function Decorators with `functools.wraps`](#define-function-decorators-with-functoolswraps)
   - [Decorators function with parameter](#decorators-function-with-parameter)
   - [Decorators with parameter - A decorator factory](#decorators-with-parameter---a-decorator-factory)
@@ -809,7 +809,7 @@ class User:
 
 ```
 
-## Decorators
+# Decorators
 
 - A design pattern that allows you to modify or extend the behavior of a function or a class without changing its source code
 - This is achieved by "wrapping" the original function with another function (the decorator), which adds functionality before and/or after the original code runs.
@@ -843,7 +843,7 @@ greet()
 
 ```
 def decorator(func):
-    def wrapper():
+    def wrapper_do_twice():
         print("Something is happening before the function is called.")
         func()
         print("Something is happening after the function is called.")
