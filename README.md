@@ -348,6 +348,58 @@ print(b[2:])
 | Decode    | `decode()`       | Bytes → string                  | `b"hi".decode("utf-8")`                   |
 | Translate | `translate()`    | Replace multiple chars          | `"abc".translate(table)`                  |
 
+- String Concatenation: To concatenate, or combine, two strings you can use the `+` operator.
+
+```
+a = "Hello"
+b = "World"
+c = a + " " + b
+print(c)
+```
+
+- Format - Strings
+
+| Method             | Syntax                    | Description               | Example                      | Output       |
+| ------------------ | ------------------------- | ------------------------- | ---------------------------- | ------------ |
+| f-string           | `f"{var}"`                | Modern, fastest, readable | `name="An"; f"Hi {name}"`    | `Hi An`      |
+| f-string (expr)    | `f"{a+b}"`                | Inline expressions        | `f"{2+3}"`                   | `5`          |
+| f-string (format)  | `f"{n:.2f}"`              | Format numbers            | `f"{3.14159:.2f}"`           | `3.14`       |
+| f-string (padding) | `f"{n:05}"`               | Zero padding              | `f"{42:05}"`                 | `00042`      |
+| f-string (align)   | `f"{s:^10}"`              | Center text               | `f"{'hi':^10}"`              | ` hi  `      |
+| `format()`         | `"{}".format(x)`          | Classic formatter         | `"Hello {}".format("Bob")`   | `Hello Bob`  |
+| `format()`         | `"{0} {1}".format(a,b)`   | Positional args           | `"{0}-{1}".format(1,2)`      | `1-2`        |
+| `format()`         | `"{name}".format(name=x)` | Named args                | `"{name}".format(name="An")` | `An`         |
+| `%` operator       | `"%s" % x`                | Old-style formatting      | `"%d apples" % 5`            | `5 apples`   |
+| `%` float          | `"%.2f" % x`              | Float formatting          | `"%.2f" % 3.1415`            | `3.14`       |
+| Format spec        | `{:,.2f}`                 | Thousand separator        | `"{:,.2f}".format(12345.6)`  | `12,345.60`  |
+| Date format        | `{:%Y-%m-%d}`             | Datetime formatting       | `f"{dt:%Y-%m-%d}"`           | `2026-01-17` |
+| Debug (3.8+)       | `f"{var=}"`               | Show name & value         | `x=10; f"{x=}"`              | `x=10`       |
+
+- Escape Characters: An escape character is a backslash `\` followed by the character you want to insert.
+
+```
+txt = "We are the so-called \"Vikings\" from the north."
+```
+
+| Escape Character | Name             | Description                | Example                       | Output         |
+| ---------------- | ---------------- | -------------------------- | ----------------------------- | -------------- |
+| `\n`             | New line         | Moves cursor to next line  | `"Hello\nWorld"`              | Hello<br>World |
+| `\t`             | Tab              | Inserts horizontal tab     | `"A\tB"`                      | A B            |
+| `\\`             | Backslash        | Inserts `\`                | `"C:\\path"`                  | C:\path        |
+| `\'`             | Single quote     | Inserts `'`                | `'It\'s ok'`                  | It's ok        |
+| `\"`             | Double quote     | Inserts `"`                | `"She said \"Hi\""`           | She said "Hi"  |
+| `\r`             | Carriage return  | Moves cursor to line start | `"Hello\rHi"`                 | Hi             |
+| `\b`             | Backspace        | Removes previous char      | `"AB\bC"`                     | AC             |
+| `\f`             | Form feed        | Page break (rare)          | `"A\fB"`                      | A B            |
+| `\v`             | Vertical tab     | Vertical spacing           | `"A\vB"`                      | A B            |
+| `\0`             | Null             | Null character             | `"A\0B"`                      | A B            |
+| `\a`             | Bell             | System alert sound         | `"\a"`                        | 🔔             |
+| `\xhh`           | Hex value        | Char from hex              | `"\x41"`                      | A              |
+| `\ooo`           | Octal value      | Char from octal            | `"\101"`                      | A              |
+| `\N{name}`       | Unicode name     | Unicode character          | `"\N{GREEK SMALL LETTER PI}"` | π              |
+| `\uXXXX`         | Unicode (16-bit) | Unicode char               | `"\u03C0"`                    | π              |
+| `\UXXXXXXXX`     | Unicode (32-bit) | Unicode char               | `"\U0001F600"`                | 😀             |
+
 # OOP
 
 ## The `class attributes`
